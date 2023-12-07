@@ -21,7 +21,7 @@ config_args=()
 
 for ext in "${!MAP[@]}"; do
     if find . -type f -name "${ext}" >/dev/null 2>&1; then
-        config_args+=("--config" "/semgrep-rules/${MAP[$ext]}")
+        config_args+=("--config" "semgrep-rules/${MAP[$ext]}")
     fi
 done
 
