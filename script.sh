@@ -1,5 +1,3 @@
-15.12 working semgrep
-
 #!/bin/bash
 
 declare -A MAP=(
@@ -22,7 +20,8 @@ declare -A MAP=(
 config_args=()
 
 for ext in "${!MAP[@]}"; do
-    if find . -type f -name "${ext}" >/dev/null 2>&1; -exec echo "Found: {}" \; then
+    find . -type f -name "${ext}" -exec echo "Found: {}" \;
+    if find . -type f -name "${ext}" >/dev/null 2>&1; then
         config_args+=("--config" "semgrep-rules/${MAP[$ext]}")
     fi
 done
@@ -32,4 +31,4 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
+semgrep ci --max-target-bytes=-1 --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
