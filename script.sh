@@ -31,4 +31,4 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --max-target-bytes=-1 --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
+semgrep ci --exclude semgrep-rules/ --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
