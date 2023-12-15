@@ -30,4 +30,4 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --exclude=semgrep-rules/ --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
+semgrep ci --config semgrep-rules/python --sarif -o results.sarif >> semgrep-output.txt
