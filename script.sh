@@ -22,7 +22,7 @@ declare -A MAP=(
 config_args=()
 
 for ext in "${!MAP[@]}"; do
-    if find . -type f -name "${ext}" >/dev/null 2>&1; then
+    if find . -type f -name "${ext}" >/dev/null 2>&1; -exec echo "Found: {}" \; then
         config_args+=("--config" "semgrep-rules/${MAP[$ext]}")
     fi
 done
@@ -32,4 +32,4 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --metrics=off --config auto --sarif -o results.sarif >> semgrep-output.txt
+semgrep ci --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
