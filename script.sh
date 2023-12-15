@@ -1,3 +1,5 @@
+15.12 working semgrep
+
 #!/bin/bash
 
 declare -A MAP=(
@@ -30,4 +32,4 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --sarif -o results.sarif >> semgrep-output.txt
+semgrep ci --metrics=off "${config_args[@]}" --sarif -o results.sarif >> semgrep-output.txt
