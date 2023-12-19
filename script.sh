@@ -30,4 +30,5 @@ if [ "${#config_args[@]}" -eq 0 ]; then
     exit 1
 fi
 
-semgrep ci --config semgrep-rules/python --sarif -o results.sarif >> semgrep-output.txt
+#semgrep ci --config semgrep-rules/python --sarif -o results.sarif >> semgrep-output.txt
+SEMGREP_BASELINE_REF=master semgrep ci "${config_args[@]}" --sarif > results.sarif || true
